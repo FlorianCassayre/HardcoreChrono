@@ -14,6 +14,23 @@ public class HardcoreChrono extends JavaPlugin {
 
 	private HCScoreboard s;
 
+	@Override
+	public void onDisable() {
+
+	}
+
+	@Override
+	public void onEnable() {
+		getServer().getPluginManager().registerEvents(new HCListener(this),
+				this);
+
+		s = new HCScoreboard(this);
+		s.getTimer().startTimer();
+
+		this.getServer().setDefaultGameMode(GameMode.SPECTATOR);
+
+	}
+	
 	public HCScoreboard getScoreboard() {
 		return s;
 	}
@@ -43,23 +60,6 @@ public class HardcoreChrono extends JavaPlugin {
 	public void setHasKilledGuardian(boolean bool) {
 		hasKilledGuardian = bool;
 		killedBoss();
-	}
-
-	@Override
-	public void onDisable() {
-
-	}
-
-	@Override
-	public void onEnable() {
-		getServer().getPluginManager().registerEvents(new HCListener(this),
-				this);
-
-		s = new HCScoreboard(this);
-		s.getTimer().startTimer();
-
-		this.getServer().setDefaultGameMode(GameMode.SPECTATOR);
-
 	}
 
 	public String getTimeString(int val) {

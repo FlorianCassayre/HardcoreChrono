@@ -14,9 +14,6 @@ public class HCScoreboard {
 	private HardcoreChrono p;
 	private HCTimer t;
 	
-
-
-
 	public HCScoreboard(HardcoreChrono plugin) {
 		p = plugin;
 		
