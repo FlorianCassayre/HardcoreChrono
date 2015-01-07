@@ -3,7 +3,6 @@ package net.lnfinity.HardcoreChrono;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -95,7 +94,6 @@ public class HCScoreboard {
 		if (run) {
 			new BukkitRunnable() {
 
-				@Override
 				public void run() {
 					if (run) {
 						seconds++;

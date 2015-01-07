@@ -1,0 +1,4 @@
+name: HardcoreChrono
+description: HardcoreChrono plugin
+main: net.lnfinity.HardcoreChrono.HardcoreChrono
+version: 0.1
