@@ -5,12 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 public class HardcoreChrono extends JavaPlugin {
 
@@ -19,6 +13,10 @@ public class HardcoreChrono extends JavaPlugin {
 	private boolean hasKilledGuardian = false;
 
 	private HCScoreboard s;
+	
+	public HCScoreboard getScoreboard() {
+		return s;
+	}
 
 	public boolean hasKilledDragon() {
 		return hasKilledDragon;
@@ -58,7 +56,7 @@ public class HardcoreChrono extends JavaPlugin {
 				this);
 
 		s = new HCScoreboard(this);
-		s.startTimer();
+		s.getTimer().startTimer();
 
 		this.getServer().setDefaultGameMode(GameMode.SPECTATOR);
 
@@ -74,7 +72,7 @@ public class HardcoreChrono extends JavaPlugin {
 
 	public void killedBoss() {
 		if (hasKilledDragon() && hasKilledWither() && hasKilledGuardian()) {
-			s.stopTimer();
+			s.getTimer().stopTimer();
 
 			for (Player online : Bukkit.getOnlinePlayers()) {
 				online.sendMessage("§l---------------------------------------------");
@@ -82,11 +80,11 @@ public class HardcoreChrono extends JavaPlugin {
 				online.sendMessage("              §4§lHardcore Chrono §f§lterminé !");
 				online.sendMessage("");
 				online.sendMessage("  §lTemps : §l"
-						+ getTimeString(s.getHours()) + ChatColor.GRAY + "§l:"
+						+ getTimeString(s.getTimer().getHours()) + ChatColor.GRAY + "§l:"
 						+ ChatColor.WHITE + "§l"
-						+ getTimeString(s.getMinutes()) + ChatColor.GRAY
+						+ getTimeString(s.getTimer().getMinutes()) + ChatColor.GRAY
 						+ "§l:" + ChatColor.WHITE + "§l"
-						+ getTimeString(s.getSeconds()));
+						+ getTimeString(s.getTimer().getSeconds()));
 
 				online.sendMessage("");
 				online.sendMessage("");

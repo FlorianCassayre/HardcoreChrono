@@ -3,7 +3,6 @@ package net.lnfinity.HardcoreChrono;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -12,40 +11,23 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class HCScoreboard {
 
-	private int seconds = 0;
-	private int minutes = 0;
-	private int hours = 0;
-
-	private boolean run = false;
-
 	private HardcoreChrono p;
+	private HCTimer t;
+	
+
+
 
 	public HCScoreboard(HardcoreChrono plugin) {
 		p = plugin;
+		
+		t = new HCTimer(p);
 	}
 
-	public void startTimer() {
-		run = true;
-		createScoreboard();
+	public HCTimer getTimer() {
+		return t;
 	}
 
-	public void stopTimer() {
-		run = false;
-	}
-
-	public int getSeconds() {
-		return seconds;
-	}
-
-	public int getMinutes() {
-		return minutes;
-	}
-
-	public int getHours() {
-		return hours;
-	}
-
-	public void createScoreboard() {
+	public void updateDisplay() {
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		Scoreboard board = manager.getNewScoreboard();
 		Objective objective = board.registerNewObjective("hardcorechrono",
@@ -56,10 +38,10 @@ public class HCScoreboard {
 		Score line = objective.getScore("");
 		line.setScore(0);
 
-		Score time = objective.getScore(p.getTimeString(hours) + ChatColor.GRAY
-				+ ":" + ChatColor.WHITE + p.getTimeString(minutes)
+		Score time = objective.getScore(p.getTimeString(t.getHours())
 				+ ChatColor.GRAY + ":" + ChatColor.WHITE
-				+ p.getTimeString(seconds));
+				+ p.getTimeString(t.getMinutes()) + ChatColor.GRAY + ":"
+				+ ChatColor.WHITE + p.getTimeString(t.getSeconds()));
 		time.setScore(-1);
 
 		line = objective.getScore(" ");
@@ -91,27 +73,6 @@ public class HCScoreboard {
 
 		updateScoreboard(board);
 
-		if (run) {
-			new BukkitRunnable() {
-
-				public void run() {
-					if (run) {
-						seconds++;
-						if (seconds >= 60) {
-							seconds = 0;
-							minutes++;
-						}
-						if (minutes >= 60) {
-							minutes = 0;
-							hours++;
-						}
-
-						createScoreboard();
-
-					}
-				}
-			}.runTaskLater(this.p, 20);
-		}
 	}
 
 	public void updateScoreboard(Scoreboard sb) {
