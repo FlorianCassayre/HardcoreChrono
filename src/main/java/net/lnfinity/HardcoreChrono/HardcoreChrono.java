@@ -5,12 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 public class HardcoreChrono extends JavaPlugin {
 
@@ -19,6 +13,10 @@ public class HardcoreChrono extends JavaPlugin {
 	private boolean hasKilledGuardian = false;
 
 	private HCScoreboard s;
+
+	public HCScoreboard getScoreboard() {
+		return s;
+	}
 
 	public boolean hasKilledDragon() {
 		return hasKilledDragon;
@@ -58,7 +56,7 @@ public class HardcoreChrono extends JavaPlugin {
 				this);
 
 		s = new HCScoreboard(this);
-		s.startTimer();
+		s.getTimer().startTimer();
 
 		this.getServer().setDefaultGameMode(GameMode.SPECTATOR);
 
@@ -74,25 +72,30 @@ public class HardcoreChrono extends JavaPlugin {
 
 	public void killedBoss() {
 		if (hasKilledDragon() && hasKilledWither() && hasKilledGuardian()) {
-			s.stopTimer();
+			s.getTimer().stopTimer();
 
 			for (Player online : Bukkit.getOnlinePlayers()) {
-				online.sendMessage("§l---------------------------------------------");
+				online.sendMessage(ChatColor.BOLD
+						+ "---------------------------------------------");
 				online.sendMessage("");
-				online.sendMessage("              §4§lHardcore Chrono §f§lterminé !");
+				online.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD
+						+ "              Hardcore Chrono " + ChatColor.WHITE
+						+ "" + ChatColor.BOLD + "terminé !");
 				online.sendMessage("");
-				online.sendMessage("  §lTemps : §l"
-						+ getTimeString(s.getHours()) + ChatColor.GRAY + "§l:"
-						+ ChatColor.WHITE + "§l"
-						+ getTimeString(s.getMinutes()) + ChatColor.GRAY
-						+ "§l:" + ChatColor.WHITE + "§l"
-						+ getTimeString(s.getSeconds()));
+				online.sendMessage(ChatColor.BOLD + "  Temps : "
+						+ ChatColor.BOLD
+						+ getTimeString(s.getTimer().getHours())
+						+ ChatColor.GRAY + "" + ChatColor.BOLD + ":"
+						+ ChatColor.WHITE + "" + ChatColor.BOLD
+						+ getTimeString(s.getTimer().getMinutes())
+						+ ChatColor.GRAY + "" + ChatColor.BOLD + ":" + ChatColor.WHITE + "" + ChatColor.BOLD
+						+ getTimeString(s.getTimer().getSeconds()));
 
 				online.sendMessage("");
 				online.sendMessage("");
 				online.sendMessage("");
 				online.sendMessage("");
-				online.sendMessage("§l---------------------------------------------");
+				online.sendMessage(ChatColor.BOLD + "---------------------------------------------");
 			}
 		}
 	}
