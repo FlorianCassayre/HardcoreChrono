@@ -80,7 +80,7 @@ public class HardcoreChrono extends JavaPlugin {
 				online.sendMessage("");
 				online.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD
 						+ "              Hardcore Chrono " + ChatColor.WHITE
-						+ "" + ChatColor.BOLD + "terminé !");
+						+ "" + ChatColor.BOLD + "complet !");
 				online.sendMessage("");
 				online.sendMessage(ChatColor.BOLD + "  Temps : "
 						+ ChatColor.BOLD
