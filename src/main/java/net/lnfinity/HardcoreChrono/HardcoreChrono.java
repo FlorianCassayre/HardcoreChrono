@@ -3,6 +3,7 @@ package net.lnfinity.HardcoreChrono;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,7 +17,12 @@ public class HardcoreChrono extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-
+		// We save the config
+		FileConfiguration config = this.getConfig();
+		config.set("hasKilledDragon", hasKilledDragon);
+		config.set("kasKilledWither", hasKilledWither);
+		config.set("hasKilledGuardian", hasKilledGuardian);
+		this.saveConfig();
 	}
 
 	@Override
@@ -29,8 +35,13 @@ public class HardcoreChrono extends JavaPlugin {
 
 		this.getServer().setDefaultGameMode(GameMode.SPECTATOR);
 
+		// We load the config, if it exists.
+		FileConfiguration config = this.getConfig();
+		hasKilledDragon = config.getBoolean("hasKilledDragon", false);
+		hasKilledWither = config.getBoolean("hasKilledWither", false);
+		hasKilledGuardian = config.getBoolean("hasKilledGuardian", false);
 	}
-	
+
 	public HCScoreboard getScoreboard() {
 		return s;
 	}
