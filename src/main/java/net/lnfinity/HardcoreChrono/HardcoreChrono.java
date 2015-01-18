@@ -32,6 +32,8 @@ public class HardcoreChrono extends JavaPlugin {
 
 		s = new HCScoreboard(this);
 		s.getTimer().startTimer();
+		
+		getCommand("hardcorechrono").setExecutor(new HCCommands(this));
 
 		this.getServer().setDefaultGameMode(GameMode.SPECTATOR);
 
@@ -99,14 +101,16 @@ public class HardcoreChrono extends JavaPlugin {
 						+ ChatColor.GRAY + "" + ChatColor.BOLD + ":"
 						+ ChatColor.WHITE + "" + ChatColor.BOLD
 						+ getTimeString(s.getTimer().getMinutes())
-						+ ChatColor.GRAY + "" + ChatColor.BOLD + ":" + ChatColor.WHITE + "" + ChatColor.BOLD
+						+ ChatColor.GRAY + "" + ChatColor.BOLD + ":"
+						+ ChatColor.WHITE + "" + ChatColor.BOLD
 						+ getTimeString(s.getTimer().getSeconds()));
 
 				online.sendMessage("");
 				online.sendMessage("");
 				online.sendMessage("");
 				online.sendMessage("");
-				online.sendMessage(ChatColor.BOLD + "---------------------------------------------");
+				online.sendMessage(ChatColor.BOLD
+						+ "---------------------------------------------");
 			}
 		}
 	}

@@ -2,3 +2,10 @@ name: HardcoreChrono
 description: HardcoreChrono plugin
 main: net.lnfinity.HardcoreChrono.HardcoreChrono
 version: 0.1
+authors: ["Florian Cassayre", "Amaury Carrade"]
+
+commands:
+    hardcorechrono:
+        description: Main HardcoreChrono command
+        aliases: [hc]
+        usage: /hc <subcommand>

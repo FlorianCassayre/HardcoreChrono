@@ -1,11 +1,10 @@
 package net.lnfinity.HardcoreChrono;
 
-import org.bukkit.scheduler.BukkitRunnable;
-
 public class HCTimer {
 
 	private HardcoreChrono p;
 	private boolean run = false;
+	private int task;
 
 	private int seconds = 0;
 	private int minutes = 0;
@@ -16,11 +15,14 @@ public class HCTimer {
 	}
 
 	public void startTimer() {
-		run = true;
-		eachSecond();
+		if(!run) {
+			run = true;
+			initializeTimer();
+		}
 	}
 
 	public void stopTimer() {
+		p.getServer().getScheduler().cancelTask(task);
 		run = false;
 	}
 
@@ -36,10 +38,9 @@ public class HCTimer {
 		return hours;
 	}
 
-	private void eachSecond() {
+	private void initializeTimer() {
 		p.getScoreboard().updateDisplay();
-		new BukkitRunnable() {
-
+		task = p.getServer().getScheduler().runTaskTimer(p, new Runnable() {
 			public void run() {
 				if (run) {
 					seconds++;
@@ -51,13 +52,10 @@ public class HCTimer {
 						minutes = 0;
 						hours++;
 					}
-					
-					eachSecond();
-
+					p.getScoreboard().updateDisplay();
 				}
 			}
-		}.runTaskLater(this.p, 20);
+		}, 20L, 20L).getTaskId();
 	}
 
 }
-
