@@ -11,13 +11,16 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class HCScoreboard {
 
-	private HardcoreChrono p;
-	private HCTimer t;
+	private HardcoreChrono p = null;
+	private HCTimer t = null;
+	private Scoreboard board = null;
+	private Objective objective = null;
 	
 	public HCScoreboard(HardcoreChrono plugin) {
 		p = plugin;
-		
 		t = new HCTimer(p);
+		
+		board = Bukkit.getScoreboardManager().getNewScoreboard();
 	}
 
 	public HCTimer getTimer() {
@@ -25,8 +28,11 @@ public class HCScoreboard {
 	}
 
 	public void updateDisplay() {
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
+		
+		if(objective != null) {
+			objective.unregister();
+		}
+		
 		Objective objective = board.registerNewObjective("hardcorechrono",
 				"dummy");
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -67,14 +73,15 @@ public class HCScoreboard {
 			Score guardian = objective.getScore("Guardian");
 			guardian.setScore(-5);
 		}
-
-		updateScoreboard(board);
-
 	}
-
-	public void updateScoreboard(Scoreboard sb) {
+	
+	public void assignScoreboard(Player player) {
+		player.setScoreboard(board);
+	}
+	
+	public void assignScoreboard() {
 		for (Player online : Bukkit.getOnlinePlayers()) {
-			online.setScoreboard(sb);
+			assignScoreboard(online);
 		}
 	}
 }

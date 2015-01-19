@@ -6,6 +6,7 @@ import org.bukkit.entity.Wither;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class HCListener implements Listener {
 
@@ -32,7 +33,10 @@ public class HCListener implements Listener {
 				}
 			}
 		}
-
 	}
-
+	
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent e) {
+		p.getScoreboard().assignScoreboard(e.getPlayer());
+	}
 }
