@@ -24,12 +24,12 @@ public class HCCommands implements CommandExecutor {
 				switch (args[0].toLowerCase()) {
 					case "start":
 						p.getScoreboard().getTimer().startTimer();
-						sender.sendMessage(ChatColor.GREEN + "Timer started!");
+						p.getServer().broadcastMessage(ChatColor.GREEN + "Timer started!");
 						break;
 					
 					case "stop":
 						p.getScoreboard().getTimer().stopTimer();
-						sender.sendMessage(ChatColor.GREEN + "Timer stoped!");
+						p.getServer().broadcastMessage(ChatColor.GREEN + "Timer stoped!");
 						break;
 					
 					case "reset":
@@ -41,7 +41,7 @@ public class HCCommands implements CommandExecutor {
 						
 						p.getScoreboard().updateDisplay();
 
-						sender.sendMessage(ChatColor.GREEN + "Game reset!");
+						p.getServer().broadcastMessage(ChatColor.GREEN + "Game reset!");
 						
 						break;
 					
