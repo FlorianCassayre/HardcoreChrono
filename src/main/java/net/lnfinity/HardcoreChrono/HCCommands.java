@@ -12,28 +12,36 @@ public class HCCommands implements CommandExecutor {
 	public HCCommands(HardcoreChrono plugin) {
 		p = plugin;
 	}
+	
+	private void displayHelp(CommandSender sender) {
+		sender.sendMessage(ChatColor.RED + "Usage: /hc <start|stop>");
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 		if (alias.equalsIgnoreCase("hc")) {
 			if (args.length != 0) {
-				switch (args[0]) {
-				case "start":
-					p.getScoreboard().getTimer().startTimer();
-					sender.sendMessage(ChatColor.GREEN + "Timer started !");
-					break;
-				case "stop":
-					p.getScoreboard().getTimer().stopTimer();
-					sender.sendMessage(ChatColor.GREEN + "Timer stoped !");
-					break;
-
-				default:
-					sender.sendMessage("/hc <start|stop>");
+				switch (args[0].toLowerCase()) {
+					case "start":
+						p.getScoreboard().getTimer().startTimer();
+						sender.sendMessage(ChatColor.GREEN + "Timer started !");
+						break;
+					
+					case "stop":
+						p.getScoreboard().getTimer().stopTimer();
+						sender.sendMessage(ChatColor.GREEN + "Timer stoped !");
+						break;
+	
+					default:
+						displayHelp(sender);
 				}
-				return true;
 			}
+			else {
+				displayHelp(sender);
+			}
+			
+			return true;
 		}
 		return false;
 	}
-
 }
