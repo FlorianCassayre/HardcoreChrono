@@ -26,6 +26,8 @@ public class HCScoreboard {
 		t = new HCTimer(p);
 		
 		board = Bukkit.getScoreboardManager().getNewScoreboard();
+		
+		updateDisplay();
 	}
 
 	public HCTimer getTimer() {

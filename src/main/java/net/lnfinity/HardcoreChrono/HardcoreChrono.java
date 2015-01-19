@@ -24,11 +24,9 @@ public class HardcoreChrono extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		getServer().getPluginManager().registerEvents(new HCListener(this),
-				this);
+		getServer().getPluginManager().registerEvents(new HCListener(this), this);
 
 		s = new HCScoreboard(this);
-		s.getTimer().startTimer();
 		
 		getCommand("hardcorechrono").setExecutor(new HCCommands(this));
 
