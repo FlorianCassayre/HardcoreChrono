@@ -16,16 +16,6 @@ public class HardcoreChrono extends JavaPlugin {
 	private HCScoreboard s;
 
 	@Override
-	public void onDisable() {
-		// We save the config
-		FileConfiguration config = this.getConfig();
-		config.set("hasKilledDragon", hasKilledDragon);
-		config.set("kasKilledWither", hasKilledWither);
-		config.set("hasKilledGuardian", hasKilledGuardian);
-		this.saveConfig();
-	}
-
-	@Override
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(new HCListener(this),
 				this);
@@ -54,6 +44,10 @@ public class HardcoreChrono extends JavaPlugin {
 
 	public void setHasKilledDragon(boolean bool) {
 		hasKilledDragon = bool;
+		
+		getConfig().set("hasKilledDragon", hasKilledDragon);
+		saveConfig();
+		
 		killedBoss();
 	}
 
@@ -63,6 +57,10 @@ public class HardcoreChrono extends JavaPlugin {
 
 	public void setHasKilledWither(boolean bool) {
 		hasKilledWither = bool;
+		
+		getConfig().set("hasKilledWither", hasKilledWither);
+		saveConfig();
+		
 		killedBoss();
 	}
 
@@ -72,6 +70,10 @@ public class HardcoreChrono extends JavaPlugin {
 
 	public void setHasKilledGuardian(boolean bool) {
 		hasKilledGuardian = bool;
+		
+		getConfig().set("hasKilledGuardian", hasKilledGuardian);
+		saveConfig();
+		
 		killedBoss();
 	}
 
