@@ -39,6 +39,9 @@ public class HardcoreChrono extends JavaPlugin {
 		hasKilledDragon = config.getBoolean("hasKilledDragon", false);
 		hasKilledWither = config.getBoolean("hasKilledWither", false);
 		hasKilledGuardian = config.getBoolean("hasKilledGuardian", false);
+		
+		// We need to assign the scoreboard to every lgged-in player (if the server is reloaded)
+		s.assignScoreboard();
 	}
 
 	public HCScoreboard getScoreboard() {
