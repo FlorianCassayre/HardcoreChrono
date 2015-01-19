@@ -14,7 +14,7 @@ public class HCCommands implements CommandExecutor {
 	}
 	
 	private void displayHelp(CommandSender sender) {
-		sender.sendMessage(ChatColor.RED + "Usage: /hc <start|stop>");
+		sender.sendMessage(ChatColor.RED + "Usage: /hc <start|stop|reset>");
 	}
 
 	@Override
@@ -24,14 +24,27 @@ public class HCCommands implements CommandExecutor {
 				switch (args[0].toLowerCase()) {
 					case "start":
 						p.getScoreboard().getTimer().startTimer();
-						sender.sendMessage(ChatColor.GREEN + "Timer started !");
+						sender.sendMessage(ChatColor.GREEN + "Timer started!");
 						break;
 					
 					case "stop":
 						p.getScoreboard().getTimer().stopTimer();
-						sender.sendMessage(ChatColor.GREEN + "Timer stoped !");
+						sender.sendMessage(ChatColor.GREEN + "Timer stoped!");
 						break;
-	
+					
+					case "reset":
+						p.setHasKilledDragon(false);
+						p.setHasKilledGuardian(false);
+						p.setHasKilledWither(false);
+						
+						p.getScoreboard().getTimer().resetTimer();
+						
+						p.getScoreboard().updateDisplay();
+
+						sender.sendMessage(ChatColor.GREEN + "Game reset!");
+						
+						break;
+					
 					default:
 						displayHelp(sender);
 				}

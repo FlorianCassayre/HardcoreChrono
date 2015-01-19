@@ -25,6 +25,14 @@ public class HCTimer {
 		p.getServer().getScheduler().cancelTask(task);
 		run = false;
 	}
+	
+	public void resetTimer() {
+		stopTimer();
+		
+		hours = 0;
+		minutes = 0;
+		seconds = 0;
+	}
 
 	public int getSeconds() {
 		return seconds;
