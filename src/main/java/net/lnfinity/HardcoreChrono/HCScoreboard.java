@@ -1,5 +1,8 @@
 package net.lnfinity.HardcoreChrono;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -15,6 +18,8 @@ public class HCScoreboard {
 	private HCTimer t = null;
 	private Scoreboard board = null;
 	private Objective objective = null;
+	
+	private NumberFormat formatter = new DecimalFormat("00");
 	
 	public HCScoreboard(HardcoreChrono plugin) {
 		p = plugin;
@@ -40,10 +45,10 @@ public class HCScoreboard {
 		Score line = objective.getScore("");
 		line.setScore(0);
 
-		Score time = objective.getScore(p.getTimeString(t.getHours())
+		Score time = objective.getScore(formatter.format(t.getHours())
 				+ ChatColor.GRAY + ":" + ChatColor.WHITE
-				+ p.getTimeString(t.getMinutes()) + ChatColor.GRAY + ":"
-				+ ChatColor.WHITE + p.getTimeString(t.getSeconds()));
+				+ formatter.format(t.getMinutes()) + ChatColor.GRAY + ":"
+				+ ChatColor.WHITE + formatter.format(t.getSeconds()));
 		time.setScore(-1);
 
 		line = objective.getScore(" ");

@@ -1,9 +1,14 @@
 package net.lnfinity.HardcoreChrono;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,6 +17,8 @@ public class HardcoreChrono extends JavaPlugin {
 	private boolean hasKilledDragon = false;
 	private boolean hasKilledWither = false;
 	private boolean hasKilledGuardian = false;
+	
+	private NumberFormat formatter = new DecimalFormat("00");
 
 	private HCScoreboard s;
 
@@ -77,14 +84,6 @@ public class HardcoreChrono extends JavaPlugin {
 		killedBoss();
 	}
 
-	public String getTimeString(int val) {
-		String s = String.valueOf(val);
-		if (s.length() == 1) {
-			return "0" + s;
-		}
-		return s;
-	}
-
 	public void killedBoss() {
 		if (hasKilledDragon() && hasKilledWither() && hasKilledGuardian()) {
 			s.getTimer().stopTimer();
@@ -100,13 +99,13 @@ public class HardcoreChrono extends JavaPlugin {
 				online.sendMessage("");
 				online.sendMessage(ChatColor.BOLD + "  Temps : "
 						+ ChatColor.BOLD
-						+ getTimeString(s.getTimer().getHours())
+						+ formatter.format(s.getTimer().getHours())
 						+ ChatColor.GRAY + "" + ChatColor.BOLD + ":"
 						+ ChatColor.WHITE + "" + ChatColor.BOLD
-						+ getTimeString(s.getTimer().getMinutes())
+						+ formatter.format(s.getTimer().getMinutes())
 						+ ChatColor.GRAY + "" + ChatColor.BOLD + ":"
 						+ ChatColor.WHITE + "" + ChatColor.BOLD
-						+ getTimeString(s.getTimer().getSeconds()));
+						+ formatter.format(s.getTimer().getSeconds()));
 
 				online.sendMessage("");
 				online.sendMessage("");
