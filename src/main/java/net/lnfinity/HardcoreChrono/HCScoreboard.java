@@ -33,8 +33,7 @@ public class HCScoreboard {
 			objective.unregister();
 		}
 		
-		Objective objective = board.registerNewObjective("hardcorechrono",
-				"dummy");
+		objective = board.registerNewObjective("hardcorechrono", "dummy");
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		objective.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Hardcore Chrono");
 
