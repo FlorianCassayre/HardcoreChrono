@@ -44,40 +44,31 @@ public class HCScoreboard {
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		objective.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Hardcore Chrono");
 
-		Score line = objective.getScore("");
-		line.setScore(0);
+		objective.getScore("").setScore(0);
 
-		Score time = objective.getScore(formatter.format(t.getHours())
+		objective.getScore(formatter.format(t.getHours())
 				+ ChatColor.GRAY + ":" + ChatColor.WHITE
 				+ formatter.format(t.getMinutes()) + ChatColor.GRAY + ":"
-				+ ChatColor.WHITE + formatter.format(t.getSeconds()));
-		time.setScore(-1);
-
-		line = objective.getScore(" ");
-		line.setScore(-2);
+				+ ChatColor.WHITE + formatter.format(t.getSeconds())).setScore(-1);
+		
+		objective.getScore(" ").setScore(-2);
 
 		if (p.hasKilledDragon()) {
-			Score dragon = objective.getScore(ChatColor.GREEN + "Dragon");
-			dragon.setScore(-3);
+			objective.getScore(ChatColor.GREEN + "Dragon").setScore(-3);
 		} else {
-			Score dragon = objective.getScore("Dragon");
-			dragon.setScore(-3);
+			objective.getScore("Dragon").setScore(-3);
 		}
 
 		if (p.hasKilledWither()) {
-			Score wither = objective.getScore(ChatColor.GREEN + "Wither");
-			wither.setScore(-4);
+			objective.getScore(ChatColor.GREEN + "Wither").setScore(-4);
 		} else {
-			Score wither = objective.getScore("Wither");
-			wither.setScore(-4);
+			objective.getScore("Wither").setScore(-4);
 		}
 
 		if (p.hasKilledGuardian()) {
-			Score guardian = objective.getScore(ChatColor.GREEN + "Guardian");
-			guardian.setScore(-5);
+			objective.getScore(ChatColor.GREEN + "Guardian").setScore(-5);
 		} else {
-			Score guardian = objective.getScore("Guardian");
-			guardian.setScore(-5);
+			objective.getScore("Guardian").setScore(-5);
 		}
 	}
 	
