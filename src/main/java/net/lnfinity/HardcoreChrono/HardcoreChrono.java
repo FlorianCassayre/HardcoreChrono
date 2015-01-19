@@ -86,6 +86,7 @@ public class HardcoreChrono extends JavaPlugin {
 	public void killedBoss() {
 		if (hasKilledDragon() && hasKilledWither() && hasKilledGuardian()) {
 			s.getTimer().stopTimer();
+			s.updateDisplay();
 
 			for (Player online : Bukkit.getOnlinePlayers()) {
 				online.sendMessage(ChatColor.BOLD
